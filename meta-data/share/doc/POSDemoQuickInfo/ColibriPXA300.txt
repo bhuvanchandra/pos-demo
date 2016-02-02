@@ -1,0 +1,36 @@
+*******************************
+ Toradex Colibri PXA300 Module 
+*******************************
+CPU Name     Marvell PXA300
+CPU Type     Intel Xscale ARM
+CPU Cores    1x
+CPU clock    208 MHz
+RAM          64MB DDR(16bit)
+Flash        128MB NAND(8Bit)
+Display      Single
+Graphics     Inbuilt Controller
+2D/3D        No
+HDMI         No
+VGA          No
+RGB          1024 x 768 18bpp
+Touch        -
+Audio        -
+Ext Bus      16 Bit
+USB          2x
+I2C          1x
+SPI          3x
+One-Wire     1x
+CF           -
+SD/MMC       2x
+UART         3x
+IrDA         1x
+PWM          4x
+GPIO         up to 92
+Analog I/P   -
+Ethernet     10/100 Mbit
+Camera       1x
+OS           WinCE 5.0 & 6.0
+Size         67.6x36.7x6.2 mm
+Temperature  0 to 70 Degree C
+Power        0.35 - 0.85 W
+Availability till 2017

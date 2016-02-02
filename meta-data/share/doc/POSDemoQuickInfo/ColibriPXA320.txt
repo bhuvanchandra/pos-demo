@@ -1,0 +1,37 @@
+*******************************
+ Toradex Colibri PXA320 Module 
+*******************************
+CPU Name     Marvell PXA320
+CPU Type     Intel Xscale ARM
+CPU Cores    1x
+CPU clock    806 MHz
+RAM          128MB DDR(16bit)
+Flash        512MB NAND(8Bit)
+Display      Single
+Graphics     Inbuilt Controller
+2D/3D        No
+HDMI         No
+VGA          No
+RGB          1024 x 768 18bpp
+Touch        4/5-wire
+Audio        Yes
+Ext Bus      16 Bit
+USB          2x
+I2C          1x
+SPI          3x
+One-Wire     1x
+CF           Yes
+SD/MMC       2x
+UART         3x
+IrDA         1x
+PWM          4x
+GPIO         up to 93
+Analog I/P   4x
+Ethernet     10/100 Mbit
+Camera       1x
+OS           WinCE 5.0 & 6.0
+Size         67.6x36.7x6.2 mm
+Temperature  0 to 70 Degree C
+             -40 to 85 Degree C
+Power        0.7 - 1.7 W
+Availability till 2017

@@ -1,0 +1,36 @@
+*******************************
+   Toradex Colibri T30 Module  
+*******************************
+CPU Name     NVidia Tergra 3
+CPU Type     ARM Cortex-A9
+CPU Cores    4x
+CPU clock    1.4 GHz
+RAM          1GB DDR3(32bit)
+Flash        2GB NAND(8Bit eMMc)
+Display      Dual(Independent)
+Graphics     GeForce GPU
+2D/3D        Yes
+HDMI         No
+VGA          No
+RGB          2048 x 1536 24bpp
+Touch        4-wire
+Audio        Yes
+Ext Bus      16 Bit
+USB          2x
+I2C          3x + DDC
+SPI          5x
+One-Wire     1x
+CF           -
+SD/MMC       2x
+UART         5x
+IrDA         1x
+PWM          4x
+GPIO         up to 110
+Analog I/P   4x
+Ethernet     10/100 Mbit
+Camera       1x
+OS           WinCE 6.0/7.0,Linux
+Size         67.6x36.7x6.2 mm
+Temperature  0 to 70 Degree C
+Power        1.4 - 5.1 W
+Availability till 2018

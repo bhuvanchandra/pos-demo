@@ -1,0 +1,40 @@
+*******************************
+   Toradex Apalis T30 Module  
+*******************************
+CPU Name     NVidia Tergra 3
+CPU Type     ARM Cortex-A9
+CPU Cores    4x
+CPU clock    1.4 GHz
+RAM          2GB DDR3(32bit)
+Flash        2GB NAND(8Bit eMMc)
+Display      Dual(Independent)
+Graphics     GeForce GPU
+2D/3D        Yes
+HDMI         No
+VGA          No
+RGB          2048 x 1536 24bpp
+Touch        4-wire
+Audio        Yes
+Ext Bus      16 Bit
+USB          3 + 1
+I2C          3x + DDC
+SPI          2x
+One-Wire     1x
+CF           -
+SD/MMC       2x
+UART         4x
+IrDA         1x
+PWM          4x
+GPIO         up to 127
+Analog I/P   4x
+PCIe         1x1, 1x4
+SeralATA     1x
+SDIO/SD/MMC  1x8bit, 1x4bit
+Ethernet     10/100/1000 Mbit
+Camera       2x
+CAN          2x
+OS           WinCE2013/7/6,Linux
+Size         82.0x45.0x6.0 mm
+Temperature  0 to 70 Degree C
+Power        1.4 - 6.0 W
+Availability till 2018

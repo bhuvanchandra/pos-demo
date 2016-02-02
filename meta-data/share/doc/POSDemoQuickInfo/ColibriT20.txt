@@ -1,0 +1,37 @@
+*******************************
+   Toradex Colibri T20 Module  
+*******************************
+CPU Name     NVidia Tergra 2
+CPU Type     ARM Cortex-A9
+CPU Cores    2x
+CPU clock    1.0 GHz
+RAM          256/512MB DDR2 32bit
+Flash        512MB/1GB NAND 8Bit
+Display      Dual(Independent)
+Graphics     GeForce GPU
+2D/3D        Yes
+HDMI         No
+VGA          No
+RGB          1920 x 1200 24bpp
+Touch        4/5-wire
+Audio        Yes
+Ext Bus      32 Bit
+USB          2x
+I2C          2x + DDC
+SPI          3x
+One-Wire     1x
+CF           -
+SD/MMC       2x
+UART         5x
+IrDA         1x
+PWM          4x
+GPIO         up to 110
+Analog I/P   4x
+Ethernet     10/100 Mbit
+Camera       1x
+OS           WinCE 6.0/7.0,Linux
+Size         67.6x36.7x6.2 mm
+Temperature  0 to 70 Degree C
+             -40 to 85 Degree C
+Power        1.1 - 2.8 W
+Availability till 2017

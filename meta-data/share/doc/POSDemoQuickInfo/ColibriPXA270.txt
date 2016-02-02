@@ -1,0 +1,36 @@
+*******************************
+ Toradex Colibri PXA270 Module 
+*******************************
+CPU Name     Marvell PXA270
+CPU Type     Intel Xscale ARM
+CPU Cores    1x
+CPU clock    312/520 MHz
+RAM          64MB SDRAM(32bit)
+Flash        32MB NOR
+Display      Single
+Graphics     Inbuilt Controller
+2D/3D        No
+HDMI         No
+VGA          No
+RGB          1024 x 768 18bpp
+Touch        4/5-wire
+Audio        Yes
+Ext Bus      32 Bit
+USB          2x
+I2C          1x
+SPI          3x
+One-Wire     No
+CF           Yes
+SD/MMC       1x
+UART         3x
+IrDA         1x
+PWM          4x
+GPIO         up to 85
+Analog I/P   4x
+Ethernet     10/100 Mbit
+Camera       1x
+OS           WinCE 5.0 & 6.0
+Size         67.6x36.7x6.2 mm
+Temperature  -10 to 70 Degree C
+Power        0.45 - 1.4 W
+Availability till 2017

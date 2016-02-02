@@ -1,0 +1,29 @@
+*******************************
+  Toradex Robin Z530M Module   
+*******************************
+CPU Name     Intel Atom Z530
+CPU Type     x86
+CPU Cores    1x
+CPU clock    1.6 GHz
+RAM          512MB DDR2
+Flash        2GB SSD on IDE
+Display      Dual(Independent)
+Graphics     Integrated Graphics
+PCIe         1x1
+USB          7 x USB2.0
+I2C          1x
+GPIOs        8xGPIO 
+Ethernet     10/100/1000 Mbit
+SerialATA    1x
+SDIO/SD/MMC  2xSDIO
+LPC          1x 
+SMD          1x 
+VideoDecoder MPEG2/HD/H.264
+VGA          1920x1080
+HDA          2x
+OS           WinXP Embedded/WePOS/Win7/WES7/WinCE6/Linux
+BIOS         Award
+Size         84.0x55.0x10.8 mm
+Temperature  0 to 60 Degree C
+Power        4.7 - 6.9W
+Availability till 2017
