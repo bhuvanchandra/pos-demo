@@ -1,65 +1,111 @@
-# a simple makefile to (cross) compile the GTK+ example gtk-inoutgpio.c
-# needs an externel cross toolchain and uses the libraries as provided in the rootfs
+# file      Makefile
+# copyright Copyright (c) 2014 Toradex AG
+#           [Software License Agreement]
+# author    $Author$
+# version   $Rev$
+# date      $Date$
+# brief     a simple makefile to (cross) compile.
+#           uses the openembedded provided sysroot and toolchain
+# target    linux on Colibri T20 / Colibri T30 / Colibri VF50 / Colibri VF61 / Apalis T30 / Apalis IMX6Q/D
+# caveats   -
 
-# set the path to the target libraries
-OECORE_TARGET_SYSROOT ?= ${HOME}/toradex/linux-prebuild-images/Colibri_T20_LinuxImageV2.5/rootfs/
+##############################################################################
+# Setup your project settings
+##############################################################################
 
-# set the prefix for the cross compiler
-CROSS_COMPILE ?= ${HOME}/gcc-linaro/bin/arm-linux-gnueabihf-
+# Set the input source files, the binary name and used libraries to link
+SRCS =  pos-elinux.o co-proc.o
+PROG := pos
+LIBS = -lm -lpthread
 
-# if CROSS_COMPILE is not empty look up the libraries in the rootfs provided for the target
-ifneq ($(strip $(CROSS_COMPILE)),)
-  PKG-CONFIG = pkg-config
-  LIBROOT = -L$(OECORE_TARGET_SYSROOT)usr/lib -Wl,-rpath-link,$(OECORE_TARGET_SYSROOT)usr/lib -L$(OECORE_TARGET_SYSROOT)lib -Wl,-rpath-link,$(OECORE_TARGET_SYSROOT)lib
-  ARCH_CFLAGS = -march=armv7-a -fno-tree-vectorize -mthumb-interwork -mfloat-abi=hard -mtune=cortex-a9
-# This configuration uses the buildsystems headers, don't emit warnings about that
-  ARCH_CFLAGS += -Wno-poison-system-directories
-# The library version control with the Codesourcery GCC 4.4.1 arm-2009q3 somtimes fails with the following linker error
-# undefined reference to `__longjmp_chk@GLIBC_2.11'
-# adding libc explicitely cures the issue
-  LIBROOT += -Wl,--allow-shlib-undefined
-# append .arm to the object files and binaries, so that native and cross builds can live side by side
-  BIN_POSTFIX = .arm
+# Set arch flags
+ARCH_CFLAGS = -march=armv7-a -fno-tree-vectorize -mthumb-interwork -mfloat-abi=hard
+
+ifeq ($(MACHINE), colibri-t20)
+  ARCH_FLAGS += -mfpu=vfpv3-d16 -mtune=cortex-a9
+else ifeq ($(MACHINE), colibri-t30)
+  ARCH_FLAGS += -mfpu=neon -mtune=cortex-a9
+else ifeq ($(MACHINE), colibri-vf)
+  ARCH_FLAGS += -mfpu=neon -mtune=cortex-a5
+else ifeq ($(MACHINE), apalis-t30)
+  ARCH_FLAGS += -mfpu=neon -mtune=cortex-a9
+else ifeq ($(MACHINE), apalis-imx6)
+  ARCH_FLAGS += -mfpu=neon -mtune=cortex-a9
+  CFLAGS += -DAPALIS_IMX6
+else ifeq ($(MACHINE), colibri-imx6)
+  ARCH_FLAGS += -mfpu=neon -mtune=cortex-a9
+  CFLAGS += -DCOLIBRI_IMX6
+else ifeq ($(MACHINE), colibri-imx7)
+  ARCH_FLAGS += -mfpu=neon -mtune=cortex-a7
+  CFLAGS += -DCOLIBRI_IMX7
+else ifeq ($(MACHINE), apalis-tk1)
+  ARCH_FLAGS += -mfpu=neon -mtune=cortex-a15
+  CFLAGS += -DAPALIS_TK1
 else
-  PKG-CONFIG = pkg-config
-  LIBROOT =
-  ARCH_CFLAGS =
-  BIN_POSTFIX =
+  $(error MACHINE is not set to a valid target)
 endif
 
-# toolchain binaries
+# Set flags to the compiler and linker
+CFLAGS += -O2 -g -Wall -DNV_IS_LDK=1 $(ARCH_CFLAGS) `$(PKG-CONFIG) --cflags gtk+-2.0` --sysroot=$(OECORE_TARGET_SYSROOT) -I$(OECORE_TARGET_SYSROOT)include
+#LDFLAGS += $(OECORE_TARGET_SYSROOT)/lib/libsoc.a
+LDFLAGS += `$(PKG-CONFIG) --libs gtk+-2.0` -rdynamic
+
+##############################################################################
+# Setup your build environment
+##############################################################################
+
+# Set the path to the oe built sysroot and
+# Set the prefix for the cross compiler
+OECORE_NATIVE_SYSROOT ?= /usr/local/oecore-x86_64/sysroots/x86_64-angstromsdk-linux/
+OECORE_TARGET_SYSROOT ?= /usr/local/oecore-x86_64/sysroots/armv7at2hf-neon-angstrom-linux-gnueabi/
+CROSS_COMPILE ?= $(OECORE_NATIVE_SYSROOT)usr/bin/arm-angstrom-linux-gnueabi/arm-angstrom-linux-gnueabi-
+
+##############################################################################
+# The rest of the Makefile usually needs no change
+##############################################################################
+
+# Set differencies between native and cross compilation
+ifneq ($(strip $(CROSS_COMPILE)),)
+  LDFLAGS += -L$(OECORE_TARGET_SYSROOT)usr/lib -Wl,-rpath-link,$(OECORE_TARGET_SYSROOT)usr/lib -L$(OECORE_TARGET_SYSROOT)lib -Wl,-rpath-link,$(OECORE_TARGET_SYSROOT)lib
+  BIN_POSTFIX =
+  PKG-CONFIG = export PKG_CONFIG_SYSROOT_DIR=$(OECORE_TARGET_SYSROOT); \
+               export PKG_CONFIG_PATH=$(OECORE_TARGET_SYSROOT)usr/lib/pkgconfig/; \
+               $(OECORE_NATIVE_SYSROOT)usr/bin/pkg-config
+else
+# Native compile
+  PKG-CONFIG = pkg-config
+  ARCH_CFLAGS =
+# Append .x86 to the object files and binaries, so that native and cross builds can live side by side
+  BIN_POSTFIX = .x86
+endif
+
+# Toolchain binaries
 CC = $(CROSS_COMPILE)gcc
-LD = $(CROSS_COMPILE)gcc
+LD = $(CROSS_COMPILE)ld
 STRIP = $(CROSS_COMPILE)strip
-RM = rm -rf
+RM = rm -f
 
-# flags for compiler
-CFLAGS += -Wall -export-dynamic -g `$(PKG-CONFIG) --cflags gtk+-2.0` $(ARCH_CFLAGS)
+# Sets the output filename and object files
+PROG := $(PROG)$(BIN_POSTFIX)
+OBJS = $(SRCS:.c=$(BIN_POSTFIX).o)
+DEPS = $(OBJS:.o=.o.d)
 
-# flags for linker only
-LDFLAGS += $(LIBROOT) `$(PKG-CONFIG) --libs gtk+-2.0`
+# pull in dependency info for *existing* .o files
+-include $(DEPS)
 
-# list of all object files
-OBJS = pos-elinux.o co-proc.o
-# list of additional libraries needed
-LIBS =
-# name of the resulting executable
-PROG = pos
+.DEFAULT_GOAL := all
 
 all: $(PROG)
 
 $(PROG): $(OBJS) Makefile
-	$(CC) $(CFLAGS) -o $@ $(OBJS) $(LIBS) $(LDFLAGS)
+	$(CC) $(CFLAGS) $(OBJS) $(LIBS) $(LDFLAGS) -o $@
 	$(STRIP) $@
 
-%.o$(BIN_POSTFIX): %.c Makefile
+%$(BIN_POSTFIX).o: %.c
 	$(CC) -c $(CFLAGS) -o $@ $<
+	$(CC) -MM $(CFLAGS) $< > $@.d
 
 clean:
-	$(RM) $(OBJS) $(PROG)
+	$(RM) $(OBJS) $(PROG) $(DEPS)
 
-install:
-	cp ./pos /usr/bin
-	cp ./meta-data/* /
-
-.PHONY: all clean install
+.PHONY: all clean

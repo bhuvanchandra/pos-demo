@@ -34,6 +34,8 @@ int serial_init(void)
 	tio.c_cc[VMIN] = 1;
 	tio.c_cc[VTIME] = 5;
 
+	ttyDevPath = "/dev/ttyLP2";
+
 	switch (getPROCID()){
 		case TYPE_PXA270:
 		case TYPE_PXA320:
@@ -51,6 +53,9 @@ int serial_init(void)
 		break;
 		case TYPE_IMX6:
 			ttyDevPath = "/dev/ttymxc2";
+		break;
+		default:
+			ttyDevPath = "/dev/ttyLP2";
 		break;
 	}
 
@@ -275,7 +280,7 @@ int main (int argc, char **argv)
 	/* Create the main window */
 	gtkBuilder= gtk_builder_new();
 	gtk_builder_add_from_file(gtkBuilder, POS_ELINUX_GLADE, NULL);
-	gtk_builder_connect_signals ( gtkBuilder, &data);
+	gtk_builder_connect_signals (gtkBuilder, &data);
 	mainwin= GTK_WIDGET(gtk_builder_get_object(gtkBuilder, "window"));
 
 	pxa270 = GTK_WIDGET(gtk_builder_get_object(gtkBuilder, "pxa270"));
